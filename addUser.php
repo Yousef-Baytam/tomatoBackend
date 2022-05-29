@@ -18,5 +18,7 @@ $query->execute();
 
 $response = [];
 $response["success"] = true;
+header("Location: http://localhost/tomato/tomatoFrontend/views/profile.html");
+
 
 echo json_encode($response);
