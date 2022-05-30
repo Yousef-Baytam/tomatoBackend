@@ -1,16 +1,13 @@
 <?php
 include("connection.php");
 
-$id = $_GET["id"];
-$query = $mysqli->prepare("Select u.first_name, u.last_name, u.email, u.phone_number, u.profile_pic, u.user_status, u.dob, t.user_type FROM users u, user_types t WHERE u.id = ? and u.user_types_id = t.id");
-$query->bind_param("i", $id);
+$query = $mysqli->prepare("SELECT r.name, r.description, r.id, r.image, r.status, AVG(rev.rating), c.name, cat.category FROM restaurants r, reviews rev, cities c, categories_has_restaurants cath, categories cat WHERE rev.restaurants_id = r.id and r.cities_id = c.id and cath.restaurants_id = r.id and cath.categories_id = cat.id group by r.id");
 $query->execute();
 $query->store_result();
 $num_rows = $query->num_rows;
 $query->bind_result($n, $l, $e, $p, $pp, $s, $d, $t);
 $query->fetch();
 $response = [];
-$pp = base64_decode($pp);
 if ($num_rows == 0) {
     $response["response"] = "User Not Found";
 } else {
