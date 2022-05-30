@@ -1,7 +1,7 @@
 <?php
 include("connection.php");
 
-if (!isset($_POST["id"]) || !isset($_POST["name"]) || !isset($_POST["last"]) || !isset($_POST["email"]) || !isset($_POST["phone"]) || !isset($_POST["location"]) || !isset($_POST["dob"])) {
+if (!isset($_POST["id"]) || !isset($_POST["name"])) {
     die('Error');
 };
 

@@ -2,7 +2,7 @@
 include("connection.php");
 
 if (!isset($_POST["img"]) || !isset($_POST["id"])) {
-    die('fuck you');
+    die('Error');
 };
 
 $img = base64_encode($_POST["img"]);
