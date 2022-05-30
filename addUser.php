@@ -12,6 +12,8 @@ $user_types_id = 1;
 $user_status = 'active';
 $password = hash("sha256", $_POST["passwrod"]);
 
+
+
 if (!isset($first_name) || !isset($last_name) || !isset($email) || !isset($phone) || !isset($dob) || !isset($password)) {
     throw new Error("Missing info");
 }
@@ -22,5 +24,3 @@ $query->execute();
 
 if (!$mysqli)
     echo ('Error' . $mysqli->error);
-
-header("Location: http://localhost/tomato/tomatoFrontend/index.html");

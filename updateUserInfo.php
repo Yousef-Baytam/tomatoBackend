@@ -13,9 +13,8 @@ $phone = $_POST["phone"];
 $location = $_POST["location"];
 $dob = $_POST["dob"];
 
-
-$query = $mysqli->prepare("Update users u, cities c SET first_name = ?, last_name = ?, email = ?, phone_number = ?, dob = ?, cities_id = c.id WHERE u.id= ? and c.name = ?");
-$query->bind_param("sssiiis", $name, $last, $email, $phone, $dob, $id, $cities_id);
+$query = $mysqli->prepare("Update users u, cities c SET first_name = ?, last_name = ?, email = ?, phone_number = ?, dob = ?, cities_id = c.id WHERE u.id= ? and c.city_name = ?");
+$query->bind_param("sssiiis", $name, $last, $email, $phone, $dob, $id, $location);
 $query->execute();
 
 $nrows = $mysqli->affected_rows;
