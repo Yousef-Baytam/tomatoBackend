@@ -1,20 +1,18 @@
 <?php
 include("connection.php");
 
-if (!isset($_POST["id"]) || !isset($_POST["name"])) {
+if (!isset($_POST["id"]) || !isset($_POST["rating"]) || !isset($_POST["text"]) || !isset($_POST["restId"])) {
     die('Error');
 };
 
 $id = $_POST["id"];
-$name = $_POST["name"];
-$last = $_POST["last"];
-$email = $_POST["email"];
-$phone = $_POST["phone"];
-$location = $_POST["location"];
-$dob = $_POST["dob"];
+$rating = $_POST["rating"];
+$text = $_POST["text"];
+$restId = $_POST["restId"];
+$status = 'pending';
 
-$query = $mysqli->prepare("Update users u, cities c SET first_name = ?, last_name = ?, email = ?, phone_number = ?, dob = ?, cities_id = c.id WHERE u.id= ? and c.city_name = ?");
-$query->bind_param("sssiiis", $name, $last, $email, $phone, $dob, $id, $location);
+$query = $mysqli->prepare("INSERT INTO reviews(rating, restaurants_id, review, status, users_id) VALUES (?, ?, ?, ?, ?)");
+$query->bind_param("iissi", $rating, $restId, $text, $status, $id);
 $query->execute();
 
 $nrows = $mysqli->affected_rows;
