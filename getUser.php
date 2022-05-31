@@ -10,7 +10,6 @@ $num_rows = $query->num_rows;
 $query->bind_result($n, $l, $e, $p, $pp, $s, $d, $t, $c);
 $query->fetch();
 $response = [];
-$pp = base64_decode($pp);
 if ($num_rows == 0) {
     $response["response"] = "User Not Found";
 } else {
