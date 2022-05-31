@@ -22,3 +22,4 @@ $query->execute();
 
 if (!$mysqli)
     echo ('Error' . $mysqli->error);
+header('Location: /tomato/tomatoFrontend');
