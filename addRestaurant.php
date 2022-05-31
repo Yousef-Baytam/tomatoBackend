@@ -10,15 +10,24 @@ $name = $_POST["name"];
 $description = $_POST["description"];
 $city = $_POST["city"];
 $status = $_POST["status"];
+$category = $_POST["category"];
+$type = $_POST["type"];
 
 
 $query = $mysqli->prepare("INSERT INTO restaurants (image, name, description, cities_id, status) VALUES (?, ?, ?, ?, ?)");
 $query->bind_param("sssss", $img, $name, $description, $city, $status);
-if($query->execute()){
-    $response["success"] = true;
-}else{
-    $response["failed"] = true;
-}
+$query->execute()
+
+$id = $query->insert_id;
+
+$query2 = $mysqli->prepare("INSERT INTO categories_has_restaurants (categories_id, restaurants_id) VALUES (?, ?)");
+$query3 = $mysqli->prepare("INSERT INTO types_has_restaurants (types_id, restaurants_id) VALUES (?, ?)");
+
+$query2->bind_param("ss", $category, $id);
+$query3->bind_param("ss", $type, $id);
+
+$response["success"] = true;
+
 
 
 echo json_encode($response);
