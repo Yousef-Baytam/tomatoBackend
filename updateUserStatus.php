@@ -9,7 +9,7 @@ $status = $_POST["status"];
 $id = $_POST["id"];
 
 
-$query = $mysqli->prepare("UPDATE users SET status = ? WHERE id = ?");
+$query = $mysqli->prepare("UPDATE users SET user_status = ? WHERE id = ?");
 $query->bind_param("si", $status, $id);
 if($query->execute()){
     $response["success"] = true;

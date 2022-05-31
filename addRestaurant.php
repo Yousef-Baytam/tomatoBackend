@@ -18,13 +18,13 @@ $query = $mysqli->prepare("INSERT INTO restaurants (image, name, description, ci
 $query->bind_param("sssss", $img, $name, $description, $city, $status);
 $query->execute()
 
-$id = $query->insert_id;
+
 
 $query2 = $mysqli->prepare("INSERT INTO categories_has_restaurants (categories_id, restaurants_id) VALUES (?, ?)");
 $query3 = $mysqli->prepare("INSERT INTO types_has_restaurants (types_id, restaurants_id) VALUES (?, ?)");
 
-$query2->bind_param("ss", $category, $id);
-$query3->bind_param("ss", $type, $id);
+$query2->bind_param("ss", $category, $query->insert_id);
+$query3->bind_param("ss", $type, $query->insert_id);
 
 $response["success"] = true;
 
